@@ -32,7 +32,7 @@ RUN go get golang.org/x/tools/cmd/cover \
 # Add a user for the builder and let it own the Go installation so it can
 # build packages for cross compilation
 
-RUN useradd -ms /bin/bash buildslave
+RUN useradd --system -m -s /bin/bash buildslave
 RUN chown -R buildslave /usr/local/go
 
 # Add our slave running script
@@ -41,7 +41,6 @@ ADD runslave.sh /usr/local/bin/runslave
 
 # USe the script as entry point
 
-VOLUME ["/home/buildslave"]
 USER buildslave
 WORKDIR /home/buildslave
 ENTRYPOINT ["/usr/local/bin/runslave"]
