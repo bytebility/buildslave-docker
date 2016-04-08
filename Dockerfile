@@ -1,0 +1,48 @@
+FROM debian:jessie
+MAINTAINER Jakob Borg <jakob@nym.se>
+
+ENV GO_VERSION 1.6
+
+# Install required packages
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential openjdk-7-jdk zip git mercurial graphviz \
+        ca-certificates curl \
+        && apt-get clean \
+        && rm -rf /var/lib/apt/lists/*
+
+# Install Go
+
+RUN curl -sSL https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz \
+        | tar -C /usr/local -xz
+
+# Use Go
+
+ENV PATH /usr/local/go/bin:$PATH
+ENV GOPATH /usr/local
+
+# Fetch required utilities
+
+RUN go get golang.org/x/tools/cmd/cover \
+	&& go get golang.org/x/net/html \
+	&& go get github.com/axw/gocov/gocov \
+	&& go get github.com/AlekSi/gocov-xml \
+	&& go get bitbucket.org/tebeka/go2xunit
+
+# Add a user for the builder and let it own the Go installation so it can
+# build packages for cross compilation
+
+RUN useradd -ms /bin/bash buildslave
+RUN chown -R buildslave /usr/local/go
+
+# Add our slave running script
+
+ADD runslave.sh /usr/local/bin/runslave
+
+# USe the script as entry point
+
+VOLUME ["/home/buildslave"]
+USER buildslave
+WORKDIR /home/buildslave
+ENTRYPOINT ["/usr/local/bin/runslave"]
+
