@@ -7,7 +7,7 @@ ENV GO_VERSION 1.6
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential openjdk-7-jdk zip git mercurial graphviz \
-        ca-certificates curl \
+        ca-certificates curl fakeroot \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
