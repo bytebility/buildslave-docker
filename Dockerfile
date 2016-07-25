@@ -1,7 +1,7 @@
 FROM debian:jessie
 MAINTAINER Jakob Borg <jakob@nym.se>
 
-ENV GO_VERSION 1.6.2
+ENV GO_VERSION 1.6.3
 
 # Install required packages
 
