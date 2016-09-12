@@ -27,7 +27,7 @@ RUN go get golang.org/x/tools/cmd/cover \
 	&& go get golang.org/x/net/html \
 	&& go get github.com/axw/gocov/gocov \
 	&& go get github.com/AlekSi/gocov-xml \
-	&& go get bitbucket.org/tebeka/go2xunit
+	&& go get github.com/tebeka/go2xunit
 
 # Add a user for the builder and let it own the Go installation so it can
 # build packages for cross compilation
