@@ -8,7 +8,6 @@ ENV GO_VERSION 1.7.3
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential openjdk-7-jdk zip git mercurial graphviz \
         ca-certificates curl fakeroot rubygems ruby-dev rpm \
-	snapcraft \
         && apt-get clean \
         && rm -rf /var/lib/apt/lists/*
 
