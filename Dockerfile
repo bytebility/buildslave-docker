@@ -32,11 +32,14 @@ RUN go get github.com/alecthomas/gometalinter \
 	&& go get github.com/FiloSottile/gvt \
 	&& go get github.com/golang/lint/golint \
 	&& go get github.com/gordonklaus/ineffassign \
+	&& go get github.com/mdempsky/unconvert \
 	&& go get github.com/mitchellh/go-wordwrap \
 	&& go get github.com/opennota/check/cmd/... \
 	&& go get github.com/tsenart/deadcode \
 	&& go get golang.org/x/net/html \
-	&& go get golang.org/x/tools/cmd/cover
+	&& go get golang.org/x/tools/cmd/cover \
+	&& go get honnef.co/go/staticcheck/cmd/staticcheck \
+	&& go get honnef.co/go/unused/cmd/unused
 
 # Extra
 
