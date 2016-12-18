@@ -2,6 +2,7 @@ FROM ubuntu:16.04
 MAINTAINER Jakob Borg <jakob@nym.se>
 
 ENV GO_VERSION 1.8beta2
+ENV MIN_GO_VERSION 1.5.4
 
 # Install required packages
 
@@ -15,6 +16,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN gem install fpm
 
 # Install Go
+
+RUN curl -sSL https://golang.org/dl/go${MIN_GO_VERSION}.linux-amd64.tar.gz \
+        | tar -C /usr/local -xz && mv /usr/local/go /usr/local/oldgo
 
 RUN curl -sSL https://golang.org/dl/go${GO_VERSION}.linux-amd64.tar.gz \
         | tar -C /usr/local -xz
@@ -53,7 +57,7 @@ RUN go get golang.org/x/tools/cmd/cover \
 # build packages for cross compilation
 
 RUN useradd --system -m -s /bin/bash buildslave
-RUN chown -R buildslave /usr/local/go
+RUN chown -R buildslave /usr/local/go /usr/local/oldgo
 
 # Add our slave running script
 
