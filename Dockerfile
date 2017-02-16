@@ -1,8 +1,8 @@
 FROM ubuntu:16.04
 MAINTAINER Jakob Borg <jakob@nym.se>
 
-ENV GO_VERSION 1.8rc3
-ENV MIN_GO_VERSION 1.6.4
+ENV GO_VERSION 1.8
+ENV MIN_GO_VERSION 1.7.4
 
 # Install required packages
 
